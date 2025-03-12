@@ -1,5 +1,7 @@
 package models
 
+import "gorm.io/gorm"
+
 type Config struct {
 	DBHost     string
 	DBPort     string
@@ -9,9 +11,9 @@ type Config struct {
 }
 
 type User struct {
-	ID       int    `json:"id"`
-	Username string `json:"username"`
-	Password string `json:"password"`
+	gorm.Model        // Adds ID, CreatedAt, UpdatedAt, DeletedAt fields
+	Username   string `gorm:"unique;not null" json:"username"`
+	Password   string `json:"password"`
 }
 
 type RegisterRequest struct {
